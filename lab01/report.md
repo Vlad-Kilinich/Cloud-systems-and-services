@@ -38,7 +38,7 @@ RUN apt-get install -y apache2
 ```
 RUN apt-get -y update
 ```  
----
+
 ### Исправленный Dockerfile
 ```  
 FROM alpine:3.14 
@@ -67,6 +67,7 @@ EXPOSE 80
 <p align="center">  
 <img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/3.jpg?raw=true" width="800" heidth = '700'/>  
 </p>  
+
 ---  
 # Вывод
 В ходе лабораторной работы были созданы два Dockerfile, с примерами хороших и плохих практик использования. Результат запуска контейнеров одинаков, однако есть ощутимая разница в размере контейнера 231МБ против 11.5 (разница в 20 раз)

@@ -39,7 +39,7 @@ RUN apt-get install -y apache2
 ```
 RUN apt-get -y update
 ```  
-
+--- 
 ### Исправленный Dockerfile
 ```  
 FROM alpine:3.14 

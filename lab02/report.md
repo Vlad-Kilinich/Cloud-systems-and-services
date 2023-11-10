@@ -12,52 +12,72 @@
 Для начала загрузили docker image на Docker Hub  
 
 <p align="center">  
-<img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/2.jpg?raw=true" width="800" heidth = '700'/>  
+<img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab02/images/1.jpg?raw=true" width="800" heidth = '700'/>  
 </p>  
 
-### Первая ошибка  
-Образ на основе Ubuntu содержит дополнительное ПО, которое не требуется для нашего случая.  
-Кроме того тег latest, может вызвать ошибки при сборке (когда выйдет другая версия). Всегда стоит указывать конкретный образ.  
+После установили minikube с помощью команд  
+
 ```  
-FROM ubuntu:latest  
+New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force
+Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe' -UseBasicParsing
+```  
+  
+```  
+$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)
+if ($oldPath.Split(';') -inotcontains 'C:\minikube'){
+  [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)
+}
 ```  
 
-### Вторая ошибка  
-Многослойность. добавляются дополнительные файлы и пакеты в образ, что ведет к увеличению размера конечного результата  
+### Создание yaml файлов  
+
+
 ```  
-RUN apt-get -y update  
-RUN apt-get install -y apache2  
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: my-service
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-service
+  template:
+    metadata:
+      labels:
+        app: my-service
+    spec:
+      containers:
+        - image: vladkilinich/dockerfile:service
+          imagePullPolicy: Always
+          name: my-service
+          ports:
+            - containerPort: 80
 ```  
 
-### Третья ошибка   
-Установка лишних пакетов. Каждый установленный пакет в Docker-образе влияет на размер образа, добавляя дополнительные файлы и зависимости.  
+
 ```
-RUN apt-get -y update
-```  
---- 
-### Исправленный Dockerfile
-```  
-FROM alpine:3.14 
+apiVersion: v1
+kind: Service
 
-RUN apk add apache2 && \ 
-    echo "<p align="center"> Hello, Packet! <br> <img src='https://raw.githubusercontent.com/OlgaGladushko/pictures/main/packet.webp'> </p>" > /var/www/localhost/htdocs/index.html 
+metadata:
+  name: my-service-lb
 
-CMD ["httpd", "-D", "FOREGROUND"]
-
-EXPOSE 80
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: 80 
+      port: 80
+      protocol: TCP
+      
+  selector:
+    app: my-service
 ```
-- Была указана конкретная версия минималистичного дистрибутива Linux (alpine) 
-- Исправлена команда RUN  
-- Лишние пакеты не устанавливаются  
-Результат:  
-<p align="center">  
-<img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/1.jpg?raw=true"/>  
-</p>  
 
-Также при использовании docker run лучше озоглавливать контейнер  (docker run --name ...)   
-<p align="center">  
-<img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/2.jpg?raw=true" width="800" heidth = '700'/>  
-</p>  
+
+
 
 ### Результат запуска контейнера:   
 <p align="center">  

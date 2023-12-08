@@ -8,23 +8,23 @@ on:
       - ".github/workflows/**"
 
 jobs:
-  login:
+  build-and-push:
     runs-on: ubuntu-22.04
 
     defaults:
       run:
-        working-directory: "/lab-3"
+        working-directory: "/lab03"
         
     steps:
+      - 
+        name: checkout
+        uses: actions/checkout@v4
       -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - 
-        name: checkout
-        uses: actions/checkout@v4
       - 
         name: push_me_and_then_just_touch_me
         uses: docker/build-push-action@v5

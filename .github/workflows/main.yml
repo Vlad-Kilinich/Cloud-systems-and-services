@@ -17,6 +17,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - 
+        name: repository checkout
+        uses: actions/checkout@v4
+      - 
         name: push_me_and_then_just_touch_me
         uses: docker/build-push-action@v5
         with:

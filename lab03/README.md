@@ -65,7 +65,14 @@ on:
           push: true
           tags: vladkilinich/lab03:latest
 ```
-[Здесь](https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/.github/workflows/main.yml) можно посмотреть файл целиком 
+[Здесь](https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/.github/workflows/main.yml) можно посмотреть файл целиком  
+
+### Проверка работоспособности
+Загружаем Dockerfile в репозиторий и ждем завершения Action в GitHub и после успешного завершения можем наблюдать docker-образ в DockerHub  
+<p align="center">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab03/images/3.png?raw=true" width="600" heidth = '500'>  
+</p>  
+
 ---  
 # Вывод
-В ходе лабораторной работы были созданы два yaml файла для описания ресурсов Kubernetes, был поднят кластер minikube, с помощью которого создали сервер.
+В ходе лабораторной работы был создан main.yml с помощью которого мы смогли создать docker-образ и сохранить его в DockerHub после push

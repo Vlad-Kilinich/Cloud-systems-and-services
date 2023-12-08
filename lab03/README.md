@@ -5,6 +5,7 @@ Year: 2023/2024
 Authors:   
 Kilinich Vladislav К34212  
 Gladushko Olga K34202
+
 ---  
 
 ### Задание
@@ -24,6 +25,7 @@ Gladushko Olga K34202
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab03/images/2.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
+
 ---  
 
 ### Настройка yml  

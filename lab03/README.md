@@ -15,8 +15,8 @@ Gladushko Olga K34202
 
 Для выполнения данного задания решено было использовать ```GitHub Actions```. В первую очередь необходимо было настроить ```Actions secrets and variables```, куда мы поместим логин и токен от DockerHub (место куда будет загружатся образ).  
 
+Создаем токен в DockerHub
 <p align="center">  
-Токен DockerHub
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab03/images/1.png?raw=true" width="600" heidth = '500'>  
 </p>  
 
@@ -25,8 +25,8 @@ Gladushko Olga K34202
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab03/images/2.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
----
-### Настройка yml
+---  
+### Настройка yml  
 Для того, чтобы собирался докер образ необходимо прописать yml файл в ```github/workflows```  
 Для начала указываем условия для сбора образа: после push в ветке main
 

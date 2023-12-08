@@ -3,7 +3,9 @@ name: CI
 on:
   push:
     branches: main
-    paths: "lab03/**"
+    paths:
+      - "lab-3/**"
+      - ".github/workflows/**"
 
 jobs:
   login:

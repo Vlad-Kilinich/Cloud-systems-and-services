@@ -27,6 +27,6 @@ jobs:
         name: push_me_and_then_just_touch_me
         uses: docker/build-push-action@v5
         with:
-          context: "./lab03/"
+          context: "./lab03"
           push: true
           tags: vladkilinich/lab03:latest

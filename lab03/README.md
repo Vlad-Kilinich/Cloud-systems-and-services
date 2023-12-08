@@ -1,5 +1,4 @@
 # Отчёт по Лабораторной работе №3
-
 University: [ITMO University](https://itmo.ru/ru/)  
 Faculty: [FICT](https://fict.itmo.ru)  
 Year: 2023/2024  

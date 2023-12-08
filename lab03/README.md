@@ -26,6 +26,7 @@ Gladushko Olga K34202
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab03/images/2.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
 ---  
+
 ### Настройка yml  
 Для того, чтобы собирался докер образ необходимо прописать yml файл в ```github/workflows```  
 Для начала указываем условия для сбора образа: после push в ветке main
@@ -38,7 +39,30 @@ on:
     branches: main
     paths: "lab03/**"
 ```
-
+Авторизация в Dockerhub
+```
+    steps:
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+Предоставляем доступ к репозиторию
+```
+        name: repository checkout
+        uses: actions/checkout@v4
+```
+Создание образа
+```
+        name: push_me_and_then_just_touch_me
+        uses: docker/build-push-action@v5
+        with:
+          context: "./lab03"
+          push: true
+          tags: vladkilinich/lab03:latest
+```
 
 ---  
 # Вывод

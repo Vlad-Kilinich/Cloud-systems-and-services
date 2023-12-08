@@ -59,6 +59,7 @@ EXPOSE 80
 <img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/1.jpg?raw=true"/>  
 </p>  
 
+### Плохая практика №1 по использованию контейнеров
 Также при использовании docker run лучше озоглавливать контейнер  (docker run --name ...)   
 <p align="center">  
 <img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab01/images/2.jpg?raw=true" width="800" heidth = '700'/>  

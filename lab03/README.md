@@ -65,7 +65,7 @@ on:
           push: true
           tags: vladkilinich/lab03:latest
 ```
-
+[Здесь](https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/.github/workflows/main.yml) можно посмотреть файл целиком 
 ---  
 # Вывод
 В ходе лабораторной работы были созданы два yaml файла для описания ресурсов Kubernetes, был поднят кластер minikube, с помощью которого создали сервер.

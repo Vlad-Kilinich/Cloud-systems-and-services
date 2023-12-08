@@ -1,8 +1,0 @@
-FROM alpine:3.14 
-
-RUN apk add apache2 && \ 
-    echo "<p align="center"> Hello, Packet! <br> <img src='https://raw.githubusercontent.com/OlgaGladushko/pictures/main/packet.webp'> </p>" > /var/www/localhost/htdocs/index.html 
-
-CMD ["httpd", "-D", "FOREGROUND"]
-
-EXPOSE 80

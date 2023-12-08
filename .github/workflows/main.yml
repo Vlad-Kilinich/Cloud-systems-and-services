@@ -8,6 +8,11 @@ on:
 jobs:
   login:
     runs-on: ubuntu-22.04
+
+    defaults:
+      run:
+        working-directory: "/lab-3"
+        
     steps:
       -
         name: Login to Docker Hub

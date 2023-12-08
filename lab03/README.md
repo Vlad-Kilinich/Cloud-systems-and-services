@@ -13,7 +13,7 @@ Gladushko Olga K34202
 
 ### Ход работы  
 
-Для начала загрузили docker image на Docker
+Для начала загрузили docker image на Docker Hub
 
 <p align="center">  
 <img src="https://github.com/Vladkilinichh/Cloud-systems-and-services/blob/main/lab02/images/1.jpg?raw=true" width="800" heidth = '700'>  

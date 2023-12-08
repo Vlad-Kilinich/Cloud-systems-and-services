@@ -19,7 +19,7 @@ jobs:
         name: checkout
         uses: actions/checkout@v4
       - 
-        name: push
+        name: push_me_and_then_just_touch_me
         uses: docker/build-push-action@v5
         with:
           context: "./lab03/"

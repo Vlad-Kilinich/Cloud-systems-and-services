@@ -31,8 +31,6 @@ kubectl expose service prometheus-server --type=NodePort --target-port=9090 --na
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/5.jpg?raw=true">  
 </p>  
 
----  
-
 ### Настройка Grafana
 
 Как и prometheus с помиощью helm установим и настроим Grafana:  
@@ -57,7 +55,7 @@ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-passwor
 </p>  
 
 ### Найстрока Дашборда  
-Выбираем готовый дашборд Grafana c ID=
+Выбираем готовый дашборд Grafana c ID=13332 и теперь можем мониторить Kubernetes кластер.
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/3.jpg?raw=true">  
 </p>  

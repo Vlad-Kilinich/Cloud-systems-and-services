@@ -25,7 +25,8 @@ kubectl expose service prometheus-server --type=NodePort --target-port=9090 --na
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/1.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
-И получаем следующий результат   
+И получаем следующий результат  
+
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/5.jpg?raw=true">  
 </p>  
@@ -46,12 +47,21 @@ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-passwor
 ```
 Результат запуска ```minikube service grafana-np```  
 <p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/2.jpg?raw=true">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/2.jpg?raw=true"  width="600" heidth = '500'>  
+</p>  
+Также открывается веб-интерфейс Grafana, куда вводим ранее декодирвоанный пароль и логин admin. Создаем соединение с prometheus  
+И получаем следующий результат:  
+
+<p align="center">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/4.jpg?raw=true">  
 </p>  
 
-### Проверка работоспособности
+### Найстрока Дашборда  
+Выбираем готовый дашборд Grafana c ID=
+<p align="center">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/3.jpg?raw=true">  
+</p>  
 
 ---  
 # Вывод
-В ходе лабораторной работы был создан main.yml с помощью которого мы смогли создать docker-образ и сохранить его в DockerHub после push
-
+В ходе лабораторной работы были настроены сервисы Grafana и Prometheus. Также был произведен мониторинг сервиса Prometheus с помощью дашборда в Grafana

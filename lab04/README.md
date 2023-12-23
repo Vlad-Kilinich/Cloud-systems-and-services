@@ -14,7 +14,7 @@ Gladushko Olga K34202
 
 ### Ход работы  
 
-Мы начнем с добавления репозитория в нашу конфигурацию helm, которую установили заранее ```choco install kubernetes-helm```:  
+Мы начнем с настройки prometheus с помощью helm, который установили заранее ```choco install kubernetes-helm```:  
 ```  
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus prometheus-community/prometheus
@@ -25,15 +25,29 @@ kubectl expose service prometheus-server --type=NodePort --target-port=9090 --na
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/1.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
-И получаем следующих результат  
-
+И получаем следующий результат   
 <p align="center">  
 <img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/5.jpg?raw=true">  
 </p>  
 
 ---  
 
-### Настройка yml  
+### Настройка Grafana
+
+Как и prometheus с помиощью helm установим и настроим Grafana:  
+```
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana grafana/grafana
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
+```  
+Декодируем пароль от Grafana для дальнейшей авторизации:  
+```
+kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | certutil -decode
+```
+Результат запуска ```minikube service grafana-np```  
+<p align="center">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/2.jpg?raw=true">  
+</p>  
 
 ### Проверка работоспособности
 

@@ -1,4 +1,4 @@
-# Отчёт по Лабораторной работе №2⭐️   
+![image](https://github.com/Vlad-Kilinich/Cloud-systems-and-services/assets/63118851/ce91b755-6c1f-491f-b4e9-f2e1246c1729)# Отчёт по Лабораторной работе №2⭐️   
 
 University: [ITMO University](https://itmo.ru/ru/)  
 Faculty: [FICT](https://fict.itmo.ru)  
@@ -14,53 +14,64 @@ Gladushko Olga K34202
 
 ### Ход работы  
 
-Мы начнем с настройки prometheus с помощью helm, который установили заранее ```choco install kubernetes-helm```:  
+Для начала создадим сертификаты, которые будем использовать в дальнейшем:  
 ```  
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prometheus prometheus-community/prometheus
-kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np  
-```  
-
-Таким образом, теперь мы можем легко получить доступ к веб-интерфейсу Prometheus  
-<p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/1.jpg?raw=true" width="600" heidth = '500'>  
-</p>  
-И получаем следующий результат  
-
-<p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/5.jpg?raw=true">  
-</p>  
-
-### Настройка Grafana
-
-Как и prometheus с помиощью helm установим и настроим Grafana:  
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout private.key -out cert.crt -subj "/CN=lab2.lab2"
 ```
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install grafana grafana/grafana
-kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
-```  
-Декодируем пароль от Grafana для дальнейшей авторизации:  
+Также добавим новую запись в файл hosts:  
 ```
-kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | certutil -decode
+127.0.0.1       lab2.lab2
 ```
-Результат запуска ```minikube service grafana-np```  
-<p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/2.jpg?raw=true"  width="600" heidth = '500'>  
-</p>  
-Также открывается веб-интерфейс Grafana, куда вводим ранее декодирвоанный пароль и логин admin. Создаем соединение с prometheus  
-И получаем следующий результат:  
+Создаем секрет packet-tls и в качестве сертификата и ключа укажем созданные ранее файлы:  
+```
+kubectl create secret tls packet-tls --cert cert.crt --key privateKey.key
+```
+### Найстрока yaml файла  
+Создаем новый yaml файл, где указываем имя секрета packet-tls и имя хоста lab2.lab2  
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 
+metadata:
+  name: ingress
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - lab2.lab2
+      secretName: packet-tls
+  rules:
+    - host: lab2.lab2
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: packet-service
+                port:
+                  number: 80
+```
+После создания файла применяем  
+```kubectl create -f ingress.yaml```  
+и подключаем ingress  
+``` minikube addons enable ingress ```  
+
+### Проверка 
+Для начала запустим команду ```minikube tunnel```, а затем ```minikube service my-service-lb```
+
+
+Попадаем на сайт и видим проблему с сертификатом:  
 <p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/4.jpg?raw=true">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/assets/63118851/ab152352-283c-4541-b757-03f976601b6d" width="600" heidth = '500'>  
 </p>  
 
-### Найстрока Дашборда  
-Выбираем готовый дашборд Grafana c ID=13332 и теперь можем мониторить Kubernetes кластер.
+Переходим на сайт и смотрим подробную информацию про сертификат:  
 <p align="center">  
-<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab04/images/3.jpg?raw=true">  
+<img src="https://github.com/Vlad-Kilinich/Cloud-systems-and-services/blob/main/lab02⭐%EF%B8%8F/images/3.jpg?raw=true" width="600" heidth = '500'>  
 </p>  
-
+Браузер по умолчанию не доверяет не проверянным сертификатам, поэтому предупреждает нас об опасности.  
 ---  
 # Вывод
-В ходе лабораторной работы были настроены сервисы Grafana и Prometheus. Также был произведен мониторинг сервиса Prometheus с помощью дашборда в Grafana
-
+В ходе лабораторной работы было настроено подключение к сервису в миникубе через https, с помощью самоподписанного сертификата.

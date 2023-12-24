@@ -1,5 +1,3 @@
-![image](https://github.com/Vlad-Kilinich/Cloud-systems-and-services/assets/63118851/ce91b755-6c1f-491f-b4e9-f2e1246c1729)# Отчёт по Лабораторной работе №2⭐️   
-
 University: [ITMO University](https://itmo.ru/ru/)  
 Faculty: [FICT](https://fict.itmo.ru)  
 Year: 2023/2024  
